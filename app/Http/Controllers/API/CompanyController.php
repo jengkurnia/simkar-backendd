@@ -15,16 +15,19 @@ use Illuminate\Support\Facades\Auth;
 class CompanyController extends Controller
 {
 
-    public function all(Request $request)
+    public function fetch(Request $request)
     {
         $id = $request->input('id');
         $name = $request->input('name');
         $limit = $request->input('limit', 10);
 
 
-        //powerhuman.com/api/company?id=1
+        //powerhuman.com/api/company?id=1 = Get Single data
         if ($id) {
-            $company = Company::with(['users'])->find($id);
+            $company = Company::with(['users'])->whereHas('users', function ($query) {
+                $query->where('user_id', Auth::id());
+            })->find($id);
+
 
             if ($company) {
                 return ResponseFormatter::success($company, 'Company found');
@@ -33,8 +36,10 @@ class CompanyController extends Controller
         }
 
 
-        //powerhuman.com/api/company
-        $companies = Company::with(['users']);
+        //powerhuman.com/api/company = Get Multiple data
+        $companies = Company::with(['users'])->whereHas('users', function ($query) {
+            $query->where('user_id', Auth::id());
+        });
 
         if ($name) {
             $companies->where('name', 'like', '%' . $name . '%');
@@ -80,7 +85,9 @@ class CompanyController extends Controller
 
 
     public function update(UpdateCompanyRequest $request, $id)
+
     {
+
         try {
             //Get Company
             $company = Company::find($id);
