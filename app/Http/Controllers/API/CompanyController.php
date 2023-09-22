@@ -103,7 +103,7 @@ class CompanyController extends Controller
             //Update company
             $company->update([
                 'name' => $request->name,
-                'logo' => $path
+                'logo' => isset($path) ? $path : $company->logo, //isser ... itu untuk ketika update tapi semisal gambarnya tetap cuma nama saja
             ]);
             return ResponseFormatter::success($company, 'Company created');
         } catch (Exception $e) {
