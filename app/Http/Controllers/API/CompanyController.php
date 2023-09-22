@@ -22,12 +22,13 @@ class CompanyController extends Controller
         $limit = $request->input('limit', 10);
 
 
+        $companyQuery = Company::with(['users'])->whereHas('users', function ($query) {
+            $query->where('user_id', Auth::id());
+        });
+
         //powerhuman.com/api/company?id=1 = Get Single data
         if ($id) {
-            $company = Company::with(['users'])->whereHas('users', function ($query) {
-                $query->where('user_id', Auth::id());
-            })->find($id);
-
+            $company = $companyQuery->find($id);
 
             if ($company) {
                 return ResponseFormatter::success($company, 'Company found');
@@ -37,9 +38,7 @@ class CompanyController extends Controller
 
 
         //powerhuman.com/api/company = Get Multiple data
-        $companies = Company::with(['users'])->whereHas('users', function ($query) {
-            $query->where('user_id', Auth::id());
-        });
+        $companies = $companyQuery;
 
         if ($name) {
             $companies->where('name', 'like', '%' . $name . '%');
@@ -104,7 +103,7 @@ class CompanyController extends Controller
             //Update company
             $company->update([
                 'name' => $request->name,
-                'logo' => $path
+                'logo' => isset($path) ? $path : $company->logo, //isser ... itu untuk ketika update tapi semisal gambarnya tetap cuma nama saja
             ]);
             return ResponseFormatter::success($company, 'Company created');
         } catch (Exception $e) {
