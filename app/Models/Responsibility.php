@@ -16,11 +16,11 @@ class Responsibility extends Model
      */
     protected $fillable = [
         'name',
-        'role_id'
+        'violation_id'
     ];
 
-    public function role()
+    public function violation()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Violation::class);
     }
 }

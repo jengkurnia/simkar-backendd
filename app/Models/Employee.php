@@ -16,13 +16,20 @@ class Employee extends Model
      */
     protected $fillable = [
         'name',
+        'nik',
         'email',
         'gender',
         'age',
+        'address',
+        'education',
         'phone',
+        'date_entry',
+        'year_service',
+        'position',
         'photo',
+
         'team_id',
-        'role_id',
+        'violation_id',
         'is_verfied',
         'verified_at'
     ];
@@ -31,8 +38,8 @@ class Employee extends Model
     {
         return $this->belongsTo(Team::class);
     }
-    public function role()
+    public function violation()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Violation::class);
     }
 }

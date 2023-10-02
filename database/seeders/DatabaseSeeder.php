@@ -8,7 +8,7 @@ use GuzzleHttp\Promise\Create;
 use Illuminate\Database\Seeder;
 use App\Models\Team;
 use App\Models\Company;
-use App\Models\Role;
+use App\Models\Violation;
 use App\Models\Responsibility;
 use App\Models\Employee;
 
@@ -20,17 +20,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(10)->create();
+        //\App\Models\User::factory(5)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
+        //\App\Models\User::factory()->create([
+        //   'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
 
-        //Company::factory(10)->create();
-        //Team::factory(5)->create();
-        //Role::factory(50)->create();
-        //Responsibility::factory(200)->create();
-        //Employee::factory(1000)->create();
+        //Company::factory(9)->create();
+        //Team::factory(10)->create();
+        //Violation::factory(30)->create();
+        //Responsibility::factory(15)->create();
+        //Employee::factory(10)->create();
     }
 }

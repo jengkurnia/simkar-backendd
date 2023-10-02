@@ -14,14 +14,22 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('nik')->nullable();
             $table->string('email')->unique();
             $table->string('gender')->nullable();
             $table->string('age')->nullable();
+            $table->string('address')->nullable();
+            $table->string('education')->nullable();
             $table->string('phone')->nullable();
+            $table->string('date_entry')->nullable();
+            $table->string('year_service')->nullable();
+            $table->string('position')->nullable();
             $table->string('photo')->nullable();
 
+
+
             $table->bigInteger('team_id')->unsigned();
-            $table->bigInteger('role_id')->unsigned();
+            $table->bigInteger('violation_id')->unsigned();
 
             $table->boolean('is_verified')->default(false);
             $table->timestamp('verified_at')->nullable();

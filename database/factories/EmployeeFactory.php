@@ -18,13 +18,20 @@ class EmployeeFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'nik' => $this->faker->nik(),
             'email' => $this->faker->unique()->safeEmail(),
             'gender' => $this->faker->randomElement(['MALE', 'FEMALE']),
             'age' => $this->faker->numberBetween(17, 55),
+            'address' => $this->faker->address(),
+            'education' => $this->faker->sentence(),
             'phone' => $this->faker->phoneNumber(),
+            'date_entry' => $this->faker->date(),
+            'year_service' => $this->faker->date('Y_m_d'),
+            'position' => $this->faker->jobTitle(),
             'photo' => $this->faker->imageUrl(),
+
             'team_id' => $this->faker->numberBetween(1, 30),
-            'role_id' => $this->faker->numberBetween(1, 50),
+            'violation_id' => $this->faker->numberBetween(1, 50),
         ];
     }
 }

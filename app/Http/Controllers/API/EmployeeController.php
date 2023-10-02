@@ -16,10 +16,17 @@ class EmployeeController extends Controller
     public function fetch(Request $request)
     {
         $id = $request->input('id');
+        $nik = $request->input('nik');
         $name = $request->input('name');
         $email = $request->input('email');
+        $gender = $request->input('gender');
         $age = $request->input('age');
+        $address = $request->input('address');
+        $education = $request->input('education');
         $phone = $request->input('phone');
+        $date_entry = $request->input('date_entry');
+        $year_service = $request->input('year_service');
+        $position = $request->input('position');
         $team_id = $request->input('team_id');
         $violation_id = $request->input('violation_id');
         $company_id = $request->input('company_id');
@@ -45,16 +52,44 @@ class EmployeeController extends Controller
             $employees->where('name', 'like', '%' . $name . '%');
         }
 
+        if ($nik) {
+            $employees->where('nik', $nik);
+        }
+
         if ($email) {
             $employees->where('email', $email);
+        }
+
+        if ($gender) {
+            $employees->where('gender', $gender);
         }
 
         if ($age) {
             $employees->where('age', $age);
         }
 
+        if ($address) {
+            $employees->where('address', $address);
+        }
+
+        if ($education) {
+            $employees->where('education', $education);
+        }
+
         if ($phone) {
             $employees->where('phone', 'like', '%' . $phone . '%');
+        }
+
+        if ($date_entry) {
+            $employees->where('date_entry', $date_entry);
+        }
+
+        if ($year_service) {
+            $employees->where('year_service', $year_service);
+        }
+
+        if ($position) {
+            $employees->where('position', $position);
         }
 
         if ($violation_id) {
@@ -88,11 +123,18 @@ class EmployeeController extends Controller
             // Create employee
             $employee = Employee::create([
                 'name' => $request->name,
+                'nik' => $request->nik,
                 'email' => $request->email,
                 'gender' => $request->gender,
                 'age' => $request->age,
+                'address' => $request->address,
+                'education' => $request->education,
                 'phone' => $request->phone,
+                'data_entry' => $request->data_entry,
+                'year_service' => $request->year_service,
+                'position' => $request->position,
                 'photo' => $path,
+
                 'team_id' => $request->team_id,
                 'violation_id' => $request->violation_id,
             ]);
@@ -127,11 +169,18 @@ class EmployeeController extends Controller
             // Update employee
             $employee->update([
                 'name' => $request->name,
+                'nik' => $request->nik,
                 'email' => $request->email,
                 'gender' => $request->gender,
                 'age' => $request->age,
+                'address' => $request->address,
+                'education' => $request->education,
                 'phone' => $request->phone,
+                'data_entry' => $request->data_entry,
+                'year_service' => $request->year_service,
+                'position' => $request->position,
                 'photo' => isset($path) ? $path : $employee->photo,
+
                 'team_id' => $request->team_id,
                 'violation_id' => $request->violation_id,
             ]);

@@ -93,7 +93,7 @@ class CompanyController extends Controller
 
             //check if company exist
             if (!$company) {
-                throw new Exception('Company not founnd');
+                throw new Exception('Company not found');
             }
 
             //Upload logo

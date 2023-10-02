@@ -29,8 +29,8 @@ class Company extends Model
         return $this->hasMany(Team::class);
     }
 
-    public function role()
+    public function violation()
     {
-        return $this->hasMany(Role::class);
+        return $this->hasMany(Violation::class);
     }
 }
