@@ -8,6 +8,7 @@ use App\Http\Requests\CreateCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
 use App\Models\User;
+use BaconQrCode\Renderer\Path\Path;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class CompanyController extends Controller
             $query->where('user_id', Auth::id());
         });
 
-        //powerhuman.com/api/company?id=1 = Get Single data
+        //simkar-backendd.com/api/company?id=1 = Get Single data
         if ($id) {
             $company = $companyQuery->find($id);
 
@@ -37,7 +38,7 @@ class CompanyController extends Controller
         }
 
 
-        //powerhuman.com/api/company = Get Multiple data
+        //simkar-backendd.com/api/company = Get Multiple data
         $companies = $companyQuery;
 
         if ($name) {
@@ -61,7 +62,7 @@ class CompanyController extends Controller
             //Create company
             $company = Company::create([
                 'name' => $request->name,
-                'logo' => $path,
+                'logo' => isset($path) ? $path : ''
             ]);
 
             if (!$company) {
@@ -103,7 +104,7 @@ class CompanyController extends Controller
             //Update company
             $company->update([
                 'name' => $request->name,
-                'logo' => isset($path) ? $path : $company->logo, //isser ... itu untuk ketika update tapi semisal gambarnya tetap cuma nama saja
+                'logo' => isset($path) ? $path : $company->logo, //isset ... itu untuk ketika update tapi semisal gambarnya tetap cuma nama saja
             ]);
             return ResponseFormatter::success($company, 'Company created');
         } catch (Exception $e) {

@@ -101,9 +101,9 @@ class EmployeeController extends Controller
         }
 
         if ($company_id) {
-            $employees->whereHas('team', function ($query) use ($company_id) {
-                $query->where('company_id', $company_id);
-            });
+            $employees->whereHas('team', function ($query) use ($company_id) { //bisa ambilin data berdasarkan company id
+                $query->where('company_id', $company_id); //wherehas itu maksudnya karyawan dari team mana
+            }); //intinya cek karyawan ini dari tim mana
         }
 
         return ResponseFormatter::success(
@@ -133,7 +133,7 @@ class EmployeeController extends Controller
                 'data_entry' => $request->data_entry,
                 'year_service' => $request->year_service,
                 'position' => $request->position,
-                'photo' => $path,
+                'photo' => isset($path) ? $path : '',
 
                 'team_id' => $request->team_id,
                 'violation_id' => $request->violation_id,

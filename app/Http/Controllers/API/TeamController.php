@@ -13,7 +13,7 @@ use App\Http\Requests\UpdateTeamRequest;
 
 class TeamController extends Controller
 {
-    public function fetch(Request $request) //fech untuk mengambil data satuan
+    public function fetch(Request $request) //fech untuk mengambil data
     {
         $id = $request->input('id');
         $name = $request->input('name');
